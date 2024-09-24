@@ -1,0 +1,26 @@
+<svg  xmlns="http://www.w3.org/2000/svg" 
+    id="screenshot-4dadd9f0-8749-80f4-8004-f4df93668050" viewBox="2326.25 -259.75 16.5 16.5"
+    xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" version="1.1">
+    <g id="shape-4dadd9f0-8749-80f4-8004-f4df93668050" data-testid="half-moon">
+        <g class="fills" id="fills-4dadd9f0-8749-80f4-8004-f4df93668050">
+            <path
+                d="M2326.250,-251.952C2326.250,-247.146,2330.146,-243.250,2334.952,-243.250C2338.369,-243.250,2341.326,-245.219,2342.750,-248.085C2334.952,-248.085,2331.085,-251.952,2331.085,-259.750C2328.219,-258.326,2326.250,-255.369,2326.250,-251.952ZL2326.250,-251.952Z"
+                width="24" height="24" />
+        </g>
+        <g width="24" height="24" id="strokes-4dadd9f0-8749-80f4-8004-f4df93668050" class="strokes">
+            <g class="inner-stroke-shape">
+                <defs>
+                    <clipPath id="inner-stroke-render-1-4dadd9f0-8749-80f4-8004-f4df93668050-0">
+                        <use href="#stroke-shape-render-1-4dadd9f0-8749-80f4-8004-f4df93668050-0" />
+                    </clipPath>
+                    <path
+                        d="M2326.250,-251.952C2326.250,-247.146,2330.146,-243.250,2334.952,-243.250C2338.369,-243.250,2341.326,-245.219,2342.750,-248.085C2334.952,-248.085,2331.085,-251.952,2331.085,-259.750C2328.219,-258.326,2326.250,-255.369,2326.250,-251.952ZL2326.250,-251.952Z"
+                        id="stroke-shape-render-1-4dadd9f0-8749-80f4-8004-f4df93668050-0"
+                        style="fill: none; stroke-width: 3; stroke: rgb(0, 0, 0); stroke-opacity: 1;" />
+                </defs>
+                <use href="#stroke-shape-render-1-4dadd9f0-8749-80f4-8004-f4df93668050-0"
+                    clip-path="url('#inner-stroke-render-1-4dadd9f0-8749-80f4-8004-f4df93668050-0')" />
+            </g>
+        </g>
+    </g>
+</svg>

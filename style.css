@@ -1,0 +1,41 @@
+
+
+body {
+    background-color: white;
+    color: black;
+}
+
+body.dark-mode {
+    background-color: #0b0d0e;
+    color: #e7ebed;
+}
+
+.toggleUIModeContainer {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.toggleUIMode {
+    filter: invert(0%);
+    user-select: none;
+    display: block;
+}
+
+body.dark-mode .toggleUIMode {
+    filter: invert(100%);
+}
+
+.container {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 8px;
+
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.05); 
+}
+
+body.dark-mode .container {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.05); 
+}
