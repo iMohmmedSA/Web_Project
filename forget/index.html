@@ -1,19 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Template</title>
+    <title>Reset</title>
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="toggleUIModeContainer container" onclick="toggleUIMode()">
         <img width="25px" class="toggleUIMode" src="/asset/half-moon.svg" alt="UI toggle">
     </div>
-    
-    <!-- Write here. Change the title too -->
-    Hi there
 
+
+    <div class="container">
+        <div class="form-box">
+            <div class="title">
+                <strong>To-Do</strong>
+            </div>
+            <label>Username/Email</label>
+            <br>
+            <input type="text" />
+            <button>Send reset link</button>
+
+        </div>
+
+    </div>
+
+    <div>
+        <a href="/register/index.html" class="link">Create account </a>
+        <a href="/login/index.html" class="link right">Login</a>
+    </div>
     <script src="/script.js"></script>
 </body>
+
 </html>
