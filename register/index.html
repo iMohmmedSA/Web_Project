@@ -1,19 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Template</title>
+    <title>Login</title>
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="toggleUIModeContainer container" onclick="toggleUIMode()">
         <img width="25px" class="toggleUIMode" src="/asset/half-moon.svg" alt="UI toggle">
     </div>
-    
+
     <!-- Write here. Change the title too -->
-    Hi there
+
+    <div class="container">
+        <form class="form-box">
+            <div class="title">
+                <strong>To-Do</strong>
+            </div>
+            <label for="fname">Username</label>
+            <input type="text" name="fname">
+            <br>
+
+            <label for="email">Email</label>
+            <input type="email" name="email">
+            <br>
+
+            <label for="pwd">Password</label>
+            <input type="password" name="pwd">
+            <br>
+
+            <button name="submit">
+                Create a account
+            </button>
+        </form>
+    </div>
+
+    <div>
+        <a href="/login" class="link">Log in</a>
+    </div>
 
     <script src="/script.js"></script>
 </body>
+
 </html>
