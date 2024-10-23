@@ -5,6 +5,8 @@
 Features:
 - [ ] User-friendly interface
 - [ ] Registration and login
+    - [x] Front End: Registration and login
+    - [ ] Back End: Registration and login
 - [ ] Task creation and editing
 - [ ] Priority setting
 - [ ] Tracking progress
