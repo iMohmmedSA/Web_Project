@@ -1,0 +1,41 @@
+
+#newToDo {
+    margin-top: 20px;
+}
+
+#content {
+    margin: auto 4%;
+}
+
+.user-input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    background-color: rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+    color: black;
+}
+
+body.dark-mode .user-input {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: white;
+}
+
+#newToDo .user-input {
+    font-size: 18px;
+}
+
+
+.custom-select-container {
+    position: relative;
+    display: inline-block;
+}
+
+body.dark-mode option {
+    background-color: #17191a;
+    color: #fff;
+}
+

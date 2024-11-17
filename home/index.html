@@ -5,15 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Template</title>
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+    <h1 style="margin: 0px; margin: 18px 0 0 25px;">To-Do</h1>
     <div class="toggleUIModeContainer container" onclick="toggleUIMode()">
         <img width="25px" class="toggleUIMode" src="/asset/half-moon.svg" alt="UI toggle">
     </div>
-    
-    <!-- Write here. Change the title too -->
-    Hi there
+
+    <div id="content">
+        <div id="newToDo">
+            <input type="text" id="newTodoInput" class="user-input" placeholder="Create a new item" oninput="onChangeNewToDoInput()">
+
+            <form id="tools" style="display:inline-block;"></form>
+        </div>
+
+        <h2 style="margin-top: 0;">Upcoming Deadlines</h2>
+        
+        <h2 style="margin-top: 0;">List</h2>
+        
+        </div>
 
     <script src="/script.js"></script>
+    <script src="./script.js"></script>
 </body>
 </html>

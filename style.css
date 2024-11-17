@@ -11,6 +11,22 @@ body.dark-mode {
     color: #e7ebed;
 }
 
+input {
+    color-scheme: light;
+}
+
+body.dark-mode input {
+    color-scheme: dark;
+}
+
+select {
+    color-scheme: light;
+}
+
+body.dark-mode select {
+    color-scheme: dark;
+}
+
 .toggleUIModeContainer {
     position: absolute;
     top: 10px;
@@ -29,14 +45,17 @@ body.dark-mode .toggleUIMode {
 }
 
 .container {
+    color: black;
     background-color: rgba(0, 0, 0, 0.05);
     padding: 8px;
 
     border-radius: 8px;
     border: 1px solid rgba(0, 0, 0, 0.05); 
+    margin: 5px;
 }
 
 body.dark-mode .container {
+    color: white;
     background-color: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.05); 
 }
@@ -66,17 +85,22 @@ body.dark-mode .form-box input {
     border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.form-box button {
+.btn {
     width: 100%;
+    max-width: 1080px;
     padding: 10px;
     background-color: #4a4a4a;
     color: white;
     border: none;
     border-radius: 5px;
+    text-decoration: none;
     cursor: pointer;
+    display: block;
+    box-sizing: border-box;
+    margin: 0 auto;
 }
 
-.form-box button:hover {
+.btn:hover {
     background-color: #333;
 }
 
@@ -93,4 +117,8 @@ body.dark-mode .form-box input {
 
 .right {
     float: right;
+}
+
+.centered-content {
+    text-align: center;
 }
