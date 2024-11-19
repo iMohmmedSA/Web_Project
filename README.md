@@ -13,7 +13,7 @@ Features:
 - [ ] Reminders and notifications
 - [ ] Recurring tasks
 - [ ] Due dates
-- [ ] Categories and tags
+- [ ] Categories
 - [ ] Search and filter options (optional)
 - [ ] Data export and backup (optional)
 
