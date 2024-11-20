@@ -31,6 +31,7 @@ function onChangeNewToDoInput() {
                         <option value="none">None</option>
                         ${options}
                     </select>
+                    <button class="container" onclick="openNewTodoModal(); return false;">Add With Decription</button>
                     <button class="container">Add</button>
                 `;
         tools.style = 'display:inline-block; margin-bottom: 10px;';
@@ -47,6 +48,7 @@ function addNewToDo () {
     const timeInput = document.querySelector('input[type="time"]');
     const priorityInput = document.querySelectorAll('select')[0];
     const categoryInput = document.querySelectorAll('select')[1];
+    const descriptionInput = document.querySelector('#newTodoDescription');
 
     let category = categoryInput.value === 'none' ? 'Default' : categoryInput.value;
     if (!todoList.find((list) => list.title === category)) {
@@ -61,7 +63,7 @@ function addNewToDo () {
         const listIndex = todoList.findIndex((list) => list.title === category);
         todoList[listIndex].todos.push({
             title: todoInputValue,
-            description: '',
+            description: descriptionInput.value || '',
             dueDate: dateInput.value,
             dueTime: timeInput.value,
             priority: priorityInput.value,
@@ -71,10 +73,22 @@ function addNewToDo () {
         updateToDoList();
         updateUpcoming();
         todoInput.value = '';
+        descriptionInput.value = '';
         onChangeNewToDoInput();
-    }
+        closeNewToDoModel();
+    }    
 
     return false;
+}
+
+function openNewTodoModal() {
+    const modal = document.querySelector('#newTodoModal');
+    modal.style.display = 'block';
+}
+
+function closeNewToDoModel() {
+    const modal = document.querySelector('#newTodoModal');
+    modal.style.display = 'none';
 }
 
 function openNewListModal() {
@@ -226,10 +240,7 @@ function updateUpcoming() {
                     </div>
                 </div>
                 <p style="margin:0px; margin-top: 10px; color:gray">${todo.description}</p>
-                <div style="display: flex; justify-content: space-between">
-                    <p style="margin:0px; margin-top: 10px; color:red; font-size: 12px;">${Math.round(todo.remainingDays)} days remaining</p>
-                    <img src="/asset/icons/forward.svg" width="30px">
-                </div>
+                <p style="margin:0px; margin-top: 10px; color:red; font-size: 12px;">${Math.round(todo.remainingDays)} days remaining</p>
             </div>
         `;
         upcomingContainer.appendChild(todoElement);

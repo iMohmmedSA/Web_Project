@@ -47,6 +47,26 @@
     </div>
     </div>
 
+    <!-- Modal -->
+    <div id="newTodoModal" class="modal" onclick="closeNewToDoModel(event)">
+        <div class="modal-content">
+            <div id="newToDoModalContent" class="container" onclick="event.stopPropagation()">
+                <textarea id="newTodoDescription" class="textfield" placeholder="Description"></textarea>
+                <button class="btn" onclick="addNewToDo()">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="editListModal" class="modal" onclick="closeEditToDoModel(event)">
+        <div class="modal-content">
+            <div id="editListModalContent" class="container" onclick="event.stopPropagation()">
+                <input type="text" name="" id="editListName" class="textfield" placeholder="List Title">
+                <button class="btn" onclick="editToDoList()">Submit</button>
+            </div>
+        </div>
+    </div>
+
     <script src="/script.js"></script>
     <script src="./script.js"></script>
 </body>
