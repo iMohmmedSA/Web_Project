@@ -1,3 +1,9 @@
+<?php 
+
+// if there user already loged in then redirect them to the home page
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
     <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/register/style.css">
 </head>
 
 <body>
@@ -15,7 +21,7 @@
     </div>
 
     <div class="container">
-        <form class="form-box">
+        <form class="form-box" method="POST" action="createAccount.php">
             <div class="title">
                 <strong>To-Do</strong>
             </div>
@@ -27,7 +33,7 @@
             <input type="email" name="email" class="textfield" required>
 
             <label for="pwd">Password</label>
-            <input type="password" name="pwd" class="textfield" required>
+            <input type="password" name="password" class="textfield" required>
 
             <button name="submit" class="btn">
                 Create a account
