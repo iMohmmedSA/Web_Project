@@ -1,6 +1,7 @@
 <?php 
 
 // if there user already loged in then redirect them to the home page
+// TODO
 
 ?>
 
@@ -35,6 +36,8 @@
             <label for="pwd">Password</label>
             <input type="password" name="password" class="textfield" required>
 
+            <p id="error" class="errorfield"></p>
+
             <button name="submit" class="btn">
                 Create a account
             </button>
@@ -46,6 +49,7 @@
     </div>
 
     <script src="/script.js"></script>
+    <script src="./script.js"></script>
 </body>
 
 </html>

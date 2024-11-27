@@ -13,7 +13,7 @@
     $username = trim($_POST['username']);
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
-    $passwordHASH = password_hash($password,60);
+    $passwordHASH = password_hash($password, PASSWORD_DEFAULT);
 
     if (empty($username) || empty($email) || empty($password)) {  
         header('Location: /register/index.php?error=empty_form');
@@ -30,9 +30,23 @@
     }
 
     // Insert the new account
-    $sql = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$password')";  
+    $sql = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$passwordHASH')";  
     if ($conn->query($sql) === TRUE) {
-        header('Location: ../login/login.php');
+        // send Email code
+        // TODO
+
+        // genrate 6 random letter
+        $verificationCode = substr(str_shuffle(string: '0123456789'), 0, length: 6);
+        // Insert the verification code into the activation_codes table
+        $userId = $conn->insert_id;
+        $insertCodeSql = "INSERT INTO activation_codes (user_id, code) VALUES ('$userId', '$verificationCode')";
+        if ($conn->query($insertCodeSql) === TRUE) {
+            header("Location: /register/verify/index.php?id=$userId");
+        } else {
+            header('Location: /register/index.php?error=database_error');
+            exit();
+        }
+        
         exit();
     } else {
         header('Location: /register/index.php?error=database_error');

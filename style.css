@@ -86,6 +86,22 @@ body.dark-mode .textfield {
     border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+.errorfield {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    background-color: rgba(255, 0, 0, 0.2 );
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+    display: none;
+}
+
+body.dark-mode .errorfield {
+    background-color: rgba(255, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
 /* .form-box input {
     width: 100%;
     padding: 10px;
