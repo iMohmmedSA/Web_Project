@@ -1,3 +1,12 @@
+<?php
+
+session_start();
+if ( !( isset($_SESSION["token"]) || empty($_SESSION["token"]) ) ) {
+    header("Location: /login/index.php");
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

@@ -1,3 +1,10 @@
+<?php 
+
+// if there user already loged in then redirect them to the home page
+// TODO
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,12 +23,12 @@
 
 
     <div class="container">
-        <form class="form-box">
+        <form class="form-box" method="POST" action="forget.php">
             <div class="title">
                 <strong>To-Do</strong>
             </div>
             <label>Username/Email</label>
-            <input type="text" class="textfield" required>
+            <input type="text" name="username_or_email" class="textfield" required>
             <button class="btn">Send reset link</button>
         </form>
 

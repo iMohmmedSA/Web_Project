@@ -21,7 +21,7 @@
     }
     
     // Check if user with the same email and username exist or not
-    $checkSql = "SELECT * FROM users WHERE username='$username' OR email='$email'";
+    $checkSql = "SELECT * FROM users WHERE (username='$username' OR email='$email') AND email_confirmed=1 AND status='active'";
     $result = $conn->query($checkSql);
 
     if ($result->num_rows > 0) {
@@ -29,8 +29,10 @@
         exit();
     }
 
+    $token = bin2hex(random_bytes(50));
+
     // Insert the new account
-    $sql = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$passwordHASH')";  
+    $sql = "INSERT INTO users (username, email, password, token) VALUES ('$username', '$email', '$passwordHASH', '$token')";  
     if ($conn->query($sql) === TRUE) {
         // send Email code
         // TODO

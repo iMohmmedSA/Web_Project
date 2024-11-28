@@ -15,7 +15,7 @@
     </div>
 
     <div class="container">
-        <form class="form-box">
+        <form class="form-box" method="POST" action="login.php">
             <div class="title">
                 <strong>To-Do</strong>
             </div>
@@ -23,6 +23,7 @@
             <input type="text" id="username" name="username" class="textfield" required>
             <label for="password">Password</label>
             <input type="password" id="password" name="password" class="textfield" required>
+            <p id="error" class="errorfield"></p>
 
             <button type="submit" class="btn">Login</button>
         </form>
@@ -34,6 +35,7 @@
     </div>
 
     <script src="/script.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>

@@ -5,11 +5,20 @@ CREATE TABLE users (
     username VARCHAR(100) NOT NULL UNIQUE,
     email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(100) NOT NULL,
+    token VARCHAR(100) NOT NULL,
     status VARCHAR(20) NOT NULL DEFAULT 'inactive',
     email_confirmed BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE activation_codes (
+    id SERIAL PRIMARY KEY,
+    user_id BIGINT UNSIGNED NOT NULL,
+    code VARCHAR(100) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE forget_password_codes (
     id SERIAL PRIMARY KEY,
     user_id BIGINT UNSIGNED NOT NULL,
     code VARCHAR(100) NOT NULL,
