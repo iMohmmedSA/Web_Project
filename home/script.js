@@ -9,86 +9,84 @@ function onChangeNewToDoInput() {
     const todoInputValue = document.querySelector('#newTodoInput').value;
     const tools = document.querySelector('#tools');
     if (todoInputValue) {
-
-        let options = ``;
-
-        todoList.forEach((list) => {
-            options += `<option value="${list.title}">${list.title}</option>`;
-        });
-
-        tools.innerHTML = `
-                    <input type="date" class="container" min="${new Date().toISOString().split('T')[0]}">
-                    <input type="time" class="container">
-                    <select class="container">
-                        <option value="none" selected disabled hidden>Select Priority</option>
-                        <option value="none">None</option>
-                        <option value="low">Low</option>
-                        <option value="medium">Medium</option>
-                        <option value="high">High</option>
-                    </select>
-                    <select class="container">
-                        <option value="none" selected disabled hidden>Select Category</option>
-                        <option value="none">None</option>
-                        ${options}
-                    </select>
-                    <button class="container" onclick="openNewTodoModal(); return false;">Add With Decription</button>
-                    <button class="container">Add</button>
-                `;
-        tools.style = 'display:inline-block; margin-bottom: 10px;';
+        tools.style.display = 'inline-block';
+        tools.style.marginBottom = '10px';
     } else if (todoInputValue === '') {
-        tools.innerHTML = '';
-        tools.style = 'display:inline-block;';
+        tools.style.display = 'none';
     }
 }
 
-function addNewToDo () {
-    const todoInput = document.querySelector('#newTodoInput');
-    const todoInputValue = todoInput.value;
-    const dateInput = document.querySelector('input[type="date"]');
-    const timeInput = document.querySelector('input[type="time"]');
-    const priorityInput = document.querySelectorAll('select')[0];
-    const categoryInput = document.querySelectorAll('select')[1];
-    const descriptionInput = document.querySelector('#newTodoDescription');
-
-    let category = categoryInput.value === 'none' ? 'Default' : categoryInput.value;
-    if (!todoList.find((list) => list.title === category)) {
-        todoList.push({
-            title: category,
-            icon: `/asset/icons/high-priority.svg`,
-            todos: []
-        });
-    }
-
-    if (todoInputValue) {
-        const listIndex = todoList.findIndex((list) => list.title === category);
-        todoList[listIndex].todos.push({
-            title: todoInputValue,
-            description: descriptionInput.value || '',
-            dueDate: dateInput.value,
-            dueTime: timeInput.value,
-            priority: priorityInput.value,
-            category: category,
-            checked: false
-        });
-        updateToDoList();
-        updateUpcoming();
-        todoInput.value = '';
-        descriptionInput.value = '';
-        onChangeNewToDoInput();
-        closeNewToDoModel();
-    }    
-
-    return false;
-}
-
-function openNewTodoModal() {
-    const modal = document.querySelector('#newTodoModal');
+function openModal(id) {
+    const modal = document.querySelector(`#${id}`);
     modal.style.display = 'block';
 }
 
-function closeNewToDoModel() {
-    const modal = document.querySelector('#newTodoModal');
+function closeModal(id) {
+    const modal = document.querySelector(`#${id}`);
     modal.style.display = 'none';
+}
+
+function editList(id, title, icon) {
+    console.log(id, title, icon);
+    openModal('editListModal');
+    document.querySelector('#editListTitle').value = title;
+    document.querySelector('#editListIcon').value = icon;
+    document.querySelector('#editListID').value = id;
+    document.querySelector('#deleteList').href = `/home/deleteList.php?id=${id}`;
+}
+
+function editItem(id, listId, title, description, check, dueDate, dueTime, priority, isParent) {
+    if (title) document.querySelector('#editItemTitle').value = title;
+    if (description) document.querySelector('#editItemDescription').value = description;
+    // if (check !== undefined) document.querySelector('#editItemCheck').checked = check; // didn't implement this yet
+    if (dueDate) document.querySelector('#editItemDueDate').value = dueDate;
+    if (dueTime) document.querySelector('#editItemDueTime').value = dueTime;
+    if (priority) document.querySelector('#editItemPriority').value = priority;
+    if (id) document.querySelector('#editItemID').value = id;
+    if (listId) document.querySelector('#editItemListID').value = listId;
+    document.querySelector('#deleteItem').href = `/home/deleteItem.php?id=${id}`;
+
+    if (isParent) {
+        splitTask();
+
+        fetch(`/home/getItems.php?parent=${id}`, {
+            method: 'GET'
+        })
+        .then((response) => {
+            if (response.ok) {
+                response.text().then((content) => {
+                    document.querySelector('#itemsContainer').innerHTML = content;
+                    document.querySelector('#itemsContainer').innerHTML += `<hr>`;
+                });
+            }
+            throw new Error('Network response was not ok');
+        })
+        .catch(() => {
+            document.querySelector('#itemsContainer').innerHTML = 'Failed to load items';
+        })
+        return;
+    } else {
+        document.querySelector('#itemsContainer').innerHTML = '';
+    }
+    openModal('editItemModal');
+}
+
+document.querySelector('#splitTask').addEventListener('click', splitTask);
+
+function splitTask(e) {
+    if (e) e.preventDefault();
+    closeModal('editItemModal');
+    let id = document.querySelector('#editItemID').value;
+    let listId = document.querySelector('#editItemListID').value;
+    let title = document.querySelector('#editItemTitle').value;
+    let description = document.querySelector('#editItemDescription').value;
+    
+    document.querySelector('#splitTitle').textContent = title;
+    document.querySelector('#splitDescription').textContent = description;
+    document.querySelector('#splitItemID').value = id;
+    document.querySelector('#splitListID').value = listId;
+
+    openModal('splitTaskModal');
 }
 
 function openNewListModal() {
@@ -99,22 +97,6 @@ function openNewListModal() {
 function closeNewListModel() {
     const modal = document.querySelector('#newListModal');
     modal.style.display = 'none';
-}
-
-function addNewToDoList() {
-    let listInput = document.querySelector('#newListName'); 
-    if (listInput.value) {
-        todoList.push({
-            title: listInput.value,
-            icon: `/asset/icons/high-priority.svg`,
-            todos: []
-        });
-        closeNewListModel();
-        updateToDoList();
-        updateUpcoming();
-        onChangeNewToDoInput();
-        listInput.value = '';    
-    }
 }
 
 function updateToDoList() {
@@ -201,6 +183,87 @@ function checkItem(listIndex, todoIndex) {
     todoList[listIndex]['todos'][todoIndex]['checked'] = !todoList[listIndex]['todos'][todoIndex]['checked'];
     updateToDoList();
     updateUpcoming();
+}
+
+function toggleItem(itemID) {
+    const item = document.querySelector(`#${itemID}`);
+    const parent = item.parentElement.parentElement;
+    parent.style.opacity = item.checked ? 0.3 : 1;
+    const id = itemID.split('-')[1];
+
+    if (item.checked) {
+        parent.children[1].style.display = 'none';
+    } else {
+        parent.children[1].style.display = 'flex';
+    }
+
+    updateTheProgress(parent.parentElement);
+
+    fetch(`/home/toggleItem.php?id=${id}&checked=${item.checked}`, {
+        method: 'GET'
+    })
+    .then((response) => {
+        if (response.ok) {
+            return;
+        }
+        throw new Error('Network response was not ok');
+    })
+    .catch(() => {
+        item.checked = !item.checked;
+        parent.style.opacity = item.checked ? 0.3 : 1;
+        if (item.checked) {
+            parent.children[1].style.display = 'none';
+        } else {
+            parent.children[1].style.display = 'flex';
+        }
+    });
+}
+
+function toggleSubItem(itemID) { 
+    const item = document.querySelector(`#${itemID}`);
+    let parent = item.parentElement;
+    parent.style.opacity = item.checked ? 0.3 : 1;
+
+    fetch(`/home/toggleItem.php?id=${itemID.split('-')[1]}&checked=${item.checked}`, {
+        method: 'GET'
+    })
+    .then((response) => {
+        if (response.ok) {
+            return;
+        }
+        throw new Error('Network response was not ok');
+    })
+    .catch(() => {
+        item.checked = !item.checked;
+        parent.style.opacity = item.checked ? 0.3 : 1;
+    });
+}
+
+function assignTask(taskID) {
+    const assign = document.querySelector(`#assign-${taskID}`).value;
+    fetch(`/home/assignTask.php?id=${taskID}&assign=${assign}`, {
+        method: 'GET'
+    })
+    .then((response) => {
+        if (response.ok) {
+            return;
+        }
+        throw new Error('Network response was not ok');
+    })
+    .catch(() => {
+        document.querySelector(`#assign-${taskID}`).value = '';
+    });
+}
+
+function updateTheProgress(parentObject) {
+    const progress = parentObject.querySelector('.progress');
+    const children = Array.from(parentObject.children).filter((child) => child.className === 'todoItemCheck');
+    const checkedCount = children.filter((child) => {
+        return child.querySelector('input[type="checkbox"]').checked;
+    }).length;
+
+    const completedRatio = checkedCount / children.length;
+    progress.style.width = `${completedRatio * 100}%`;
 }
 
 function updateUpcoming() {
@@ -310,3 +373,20 @@ function fakeList() {
     updateToDoList();
     updateUpcoming();
 }
+
+function selectIcon() {
+    const selectedicon = document.querySelector('#newListIcon');
+    const iconContainer = document.querySelector('#iconContainer');
+    const icon = document.querySelector('#listiconModel');
+    iconContainer.style.display = 'block';
+    icon.src = selectedicon.value;
+}
+
+document.querySelector('#newListModalContent').addEventListener('submit', function (e) {
+    const selectedicon = document.querySelector('#newListIcon');
+    
+    if (selectedicon.value === 'none') {
+        alert('Please select an icon');
+        e.preventDefault();
+    }
+});

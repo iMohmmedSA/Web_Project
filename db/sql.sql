@@ -25,3 +25,35 @@ CREATE TABLE forget_password_codes (
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
+
+CREATE TABLE todo_lists (
+    id SERIAL PRIMARY KEY,
+    user_id BIGINT UNSIGNED NOT NULL,
+    title VARCHAR(32) NOT NULL,
+    icon_uri VARCHAR(32) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE items (
+    id SERIAL PRIMARY KEY,
+    list_id BIGINT UNSIGNED NOT NULL,
+    user_id BIGINT UNSIGNED NOT NULL,
+    checked BOOLEAN NOT NULL DEFAULT FALSE,
+    title VARCHAR(32) NOT NULL,
+    description TEXT,
+    priority ENUM('low', 'medium', 'high'),
+    date DATE,
+    time TIME,
+    FOREIGN KEY (list_id) REFERENCES todo_lists(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+ALTER TABLE items ADD COLUMN parent_id BIGINT UNSIGNED NULL, 
+ADD FOREIGN KEY (parent_id) REFERENCES items(id) ON DELETE CASCADE;
+
+ALTER TABLE items 
+ADD COLUMN weight INT NOT NULL DEFAULT 1;
+
+ALTER TABLE items 
+ADD COLUMN assign_id BIGINT UNSIGNED NULL, 
+ADD FOREIGN KEY (assign_id) REFERENCES users(id) ON DELETE SET NULL;

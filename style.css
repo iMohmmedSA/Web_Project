@@ -102,21 +102,6 @@ body.dark-mode .errorfield {
     border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* .form-box input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    background-color: rgba(0, 0, 0, 0.05);
-    box-sizing: border-box;
-}
-
-body.dark-mode .form-box input {
-    background-color: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-} */
-
 .btn {
     width: 100%;
     max-width: 1080px;
@@ -153,4 +138,8 @@ body.dark-mode .form-box input {
 
 .centered-content {
     text-align: center;
+}
+
+body.dark-mode .container #listiconModel {
+    filter: invert(100%);
 }

@@ -132,3 +132,25 @@ body.dark-mode .progressBar {
 body.dark-mode .progress {
     background-color: #6390ff;
 }
+
+.listItemTitle:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+#splitTitle, #splitDescription {
+    margin: 0;
+}
+
+.weight {
+    width: 20%;
+}
+
+#splitAdd {
+    color: black;
+    font-size:20px; 
+}
+
+body.dark-mode #splitAdd {
+    color: white;
+}
